@@ -1,0 +1,273 @@
+* {
+	margin: 0;
+}
+
+body {
+	font-family: "Helvetica", sans-serif;
+	font-size: 20px;
+	color: #61b390;
+}
+
+a, h1, h2, h3 {
+	color: #01352c;
+	text-align: center;
+}
+
+h1 {
+	margin-bottom: 60px;
+}
+
+form {
+	margin: .1em auto;
+	padding: .1em;
+	width: 400px;
+	border: 1px;
+}
+
+.page {
+	background: url("images/nightsky.jpg");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	height: 125vh;
+}
+
+.heading {
+	font-weight: bold;
+}
+
+
+input[type=text] {
+	margin: .5em 0;
+	padding: .5em;
+	font-size: 12px;
+	color: #777;
+	width: 200px;
+}
+
+input[type=textarea] {
+	margin: .5em 0;
+	padding: .5em;
+	font-size: 12px;
+	color: #777;
+	width: 200px;
+}
+
+html {
+	background: #e1eacd;
+}
+
+.button {
+	display: inline-block;
+	background-color: #61b390;
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 2rem;
+	cursor: pointer;
+}
+
+input[type=text] {
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #ffffff;
+	font-size: 16px;
+	color: #000;
+}
+
+form > p {
+	font-weight: bold;
+	font-size: 24px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+a {
+	color: #61b390; 
+	text-decoration: none; 
+	font-weight: bold; 
+}
+
+a:hover {
+	color: #01352c; 
+	text-decoration: underline; 
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;	
+	overflow-x: auto;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.td-btn, td > form {
+
+	border: none;
+	background-color: transparent;
+	text-align: left;
+	white-space: nowrap;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+th {
+	background-color: #61b390;
+	color: white;
+}
+
+form {
+	background-color: #f2f2f2;
+	padding: 20px;
+	border-radius: 5px;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.heading {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	white-space: nowrap;
+}
+
+input[type=text], input[type=number] {
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	margin-bottom: 20px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+input[type=submit] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+input[type=submit]:hover {
+	background-color: #3e8e41;
+}
+
+button.btn-primary {
+	background-color: #61b390;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 5px;
+	border: none;
+	padding: 10px 20px;
+	display: block;
+	margin: 0 auto;
+}
+
+.btn-primary:hover {
+	background-color: #01352c; 
+	border-color: #01352c; 
+}
+
+#map {
+	height: 500px;
+	width: 100%;
+}
+
+.map-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+
+}
+
+.map-content-key {
+	margin: 0 2rem;
+	padding: 1rem;
+	background-color: #e1eacd;
+}
+
+.map-content-form {
+	margin: 0 2rem;
+}
+
+.map-content-form > button {
+	margin: 0 0 0 2rem;
+}
+
+.map-section > h1,
+.index-h1 {
+	padding: 2rem;
+	background-color: #61b390;
+}
+
+.apod-section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.apod-section > h1 {
+	padding: 2rem 2rem 0 2rem;
+	width: 100vw;
+	background-color: #61b390;
+	margin-bottom: 0;
+}
+
+.apod-img {
+	max-width: 400px;
+	margin: 2rem;
+	border: 2rem solid #61b38f86;
+}
+
+figure {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+figcaption {
+	display: flex;
+	background-color: #ffffff;
+	flex-direction: column;
+	margin: 0 2rem 2rem 2rem;
+	max-width: 800px;
+	padding: 1rem;
+	
+}
+
+figcaption > * {
+	padding: 1rem;
+}
+figcaption > p {
+	text-align: center;
+	font-size: 1rem;
+}
+
+figcaption > h3 {
+	padding: 0;
+	font-size: 1rem;
+}
+figcaption > h2 {
+	font-size: 1.5rem;
+}
+
+.apod-section > a {
+	margin: 0;
+}

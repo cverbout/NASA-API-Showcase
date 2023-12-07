@@ -1,0 +1,7 @@
+wheel
+flask
+google-cloud-datastore
+gunicorn
+rsa
+uuid
+googlemaps

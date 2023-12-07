@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="map-section">
+	<h1>NASA Earth Observatory Natural Event Tracker</h1>
+	<div class="map-content">	
+		<div class="map-content-key">
+			<h2>Legend</h2>
+		</div>
+		<div id="map"></div>
+		<form class="map-content-form" action="{{ url_for('map') }}" method="GET">
+			<div class="form-group">
+				<label for="days">Last x Days:</label>
+				<input type="number" value="" class="form-control" id="days" name="days">
+			</div>
+			<div class="form-group">
+				<label for="limit">Limit:</label>
+				<input type="number" value="" class="form-control" id="limit" name="limit">
+			</div>
+			<button type="submit" class="btn btn-primary">Search</button>
+
+		</form>
+	</div>
+	<a class="button" href="{{ url_for('index') }}">Back</a>
+
+</section>
+<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&callback=initMap"></script>
+<script>
+/**
+ * Initialize the map and create markers for events.
+ */
+async function initMap() {
+	const { Map } = await google.maps.importLibrary("maps");
+	const { PinElement } = await google.maps.importLibrary("marker");
+
+	const map = new google.maps.Map(document.getElementById("map"), {
+		center: { lat: 0, lng: 0 },
+		zoom: 1,
+		mapId: "46093e9daee00a90"
+	});
+
+	const eventData = JSON.parse('{{ map_data | tojson }}');
+	const categoryData = JSON.parse('{{ category_data | tojson }}');
+
+	// Create legend elements for each category
+	for (const category in categoryData) {
+		const element = document.querySelector('.map-content-key');
+		const div = document.createElement('div');
+		div.style.display = "flex";
+		div.style.flexDirection = "row";
+		div.style.alignItems = "center";
+		div.style.justifyContent = "space-between";
+		element.append(div);
+		const paragraph = document.createElement('p');
+		paragraph.style.fontSize = "1rem";
+		paragraph.style.padding = ".25rem 1rem .25rem 0";
+		const hr1 = document.createElement('div');
+		hr1.style.minHeight = "1.25rem";
+		hr1.style.minWidth = "1.25rem";
+		hr1.style.backgroundColor = `${categoryData[category].color2}`;
+		hr1.style.border = ".1rem solid";
+		hr1.style.borderColor = `${categoryData[category].color3}`;
+		const hr2 = document.createElement('div');
+		hr2.style.height = ".5rem";
+		hr2.style.width = ".5rem";
+		hr2.style.backgroundColor = `${categoryData[category].color1}`;
+		paragraph.textContent = categoryData[category].title;
+		div.append(paragraph);
+		div.append(hr1);
+		hr1.append(hr2);
+	}
+
+	// Create markers for each event
+	for (const eventName in eventData) {
+		const eventDict = eventData[eventName];
+		const eventCoordinates = eventDict.coordinates;
+		const catId = eventDict.category_id;
+		const catTitle = eventDict.category_title;
+		const catInfo = categoryData[catId];
+		const glyph = catInfo.color1;
+		const backgroundColor = catInfo.color2;
+		const border = catInfo.color3;
+		const desc = catInfo.description;
+
+		for (const coordinates of eventCoordinates) {
+			const position = new google.maps.LatLng(coordinates.lat, coordinates.lon);
+			const content = new PinElement({
+				background: backgroundColor,
+				glyphColor: glyph,
+				borderColor: border
+			}).element;
+			contentString = '<h1>' + eventName + '</h1><h2>' + catTitle + '</h2><h3>' + coordinates.date + '</h3><p>' + desc + '</p>';
+			await createMarker(map, position, eventName, content, contentString);
+		}
+	}
+/**
+ * Create a marker on the map with an info window.
+ *
+ * @param {object} map - The map object.
+ * @param {google.maps.LatLng} position - The position of the marker.
+ * @param {string} title - The title of the marker.
+ * @param {Element} content - The content element of the marker.
+ * @param {string} contentString - The content string for the info window.
+ * @returns {google.maps.Marker} - The created marker object.
+ */
+ async function createMarker(map, position, title, content, contentString) {
+		const { InfoWindow } = await google.maps.importLibrary("maps");
+		const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+		const marker = new AdvancedMarkerElement({
+			position: position,
+			map: map,
+			title: title,
+			content: content
+		});
+
+		const infoWindow = new InfoWindow({
+			content: contentString,
+		});
+
+		marker.addListener("click", () => {
+			infoWindow.open({
+				anchor: marker,
+				map,
+			});
+		});
+		return marker;
+	}
+}
+
+initMap();
+</script>
+{% endblock %}

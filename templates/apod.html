@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="apod-section">
+    <h1>NASA Astronomy Photo of The Day</h1>
+    <figure>
+        <img class = "apod-img" src="{{APOD_image}}"/>
+        <figcaption class = "apod-fc" >
+            <h2 id="apod-h2"></h2>
+            <h3 id="apod-h3"></h3>
+            <p id="apod-p"></p>
+        </figcaption>
+    </figure>
+    <a class="button" href="{{ url_for('index') }}">Back</a>
+</section>
+<script>
+    const APOD_title = "{{APOD_title}}"
+    const APOD_author = "{{APOD_author}}"
+    const APOD_text = "{{APOD_text}}"
+    const h2Element = document.getElementById('apod-h2');
+    console.log(APOD_title);
+    h2Element.textContent = APOD_title;
+
+    const h3Element = document.getElementById('apod-h3');
+    console.log(APOD_author);
+    h3Element.textContent = APOD_author;
+
+    const pElement = document.getElementById('apod-p');
+    console.log(APOD_text);
+    pElement.textContent = APOD_text;
+</script>
+{% endblock %}
